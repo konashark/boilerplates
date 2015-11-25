@@ -1,5 +1,5 @@
-define([],
-    function () {
+define(['js/moduleB/modbView', 'js/moduleB/modbModel'],
+    function (VIEW, MODEL) {
         console.log("MODULE-B is alive!");
 
         // ********************************************
@@ -10,6 +10,7 @@ define([],
         // ********************************************
         function enter (currentState, userData) {
             console.log("Entering MODULE-B...");
+            VIEW.draw();
         }
 
         // ********************************************
