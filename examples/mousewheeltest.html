@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #screen {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="screen">
+            Hello world!
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            window.onload = function() {
+                // Test - a very brief swipe gesture on a Mac touchpad generates dozens of events over a 1+ second span
+                var lastScroll = 0;
+                $('#screen').on('mousewheel', function(event) {
+                    //event.preventDefault();     // Without this, the events are much more reasonable
+                    console.log('Interval ' + (event.timeStamp - lastScroll));
+                    lastScroll = event.timeStamp;
+                    return false; // Without this, the events are much more reasonable
+                });
+            }
+        </script>
+    </body>
+</html>

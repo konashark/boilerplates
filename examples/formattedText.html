@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #screen {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                color: #444;
+                font-size: 18px;
+            }
+            span:hover {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="screen">
+            <pre>
+var APIS = APIS || {};
+
+APIS.STORAGE = (function(undefined) {
+    var NOT_SUPPORTED_MSG = "Local Storage not supported on this device.";
+
+    <span>
+    var persistentWrite = function(name, value) {
+        if(typeof(localStorage) == "object") {
+            localStorage.setItem(name, JSON.stringify(value));
+        } else {
+            console.log(NOT_SUPPORTED_MSG);
+        }
+    };
+    </span>
+    var persistentRead = function(name) {
+        if(typeof(localStorage) == "object") {
+            var value = localStorage.getItem(name);
+            if (value !== "undefined") {
+                value = JSON.parse(value);
+            }
+            return value;
+        } else {
+            console.log(NOT_SUPPORTED_MSG);
+        }
+    };
+
+    var persistentRemove = function(name) {
+        console.log("LOCAL STORAGE: Removing " + name);
+        if(typeof(localStorage) == "object") {
+            localStorage.removeItem(name);
+        } else {
+            console.log(NOT_SUPPORTED_MSG);
+        }
+    };
+
+    return {
+        persistentWrite : persistentWrite,
+        persistentRead : persistentRead,
+        persistentRemove : persistentRemove
+    };
+})();
+            </pre>
+        </div>
+
+        <script>
+            console.log("JavaScript is alive!");
+        </script>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    var map;
+    var latitude;
+    var longitude;
+    var output = document.getElementById("map");
+
+    function showMap(position) {
+        latitude  = position.coords.latitude;
+        longitude = position.coords.longitude;
+
+        output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: latitude, lng: longitude},
+            zoom: 15
+        });
+
+        //var img = new Image();
+        //img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=16&size=640x640&sensor=false";
+        //output.appendChild(img);
+    }
+
+    function geoFindMe() {
+        if (!navigator.geolocation){
+            output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+            return;
+        }
+
+        output.innerHTML = "<p>Locating…</p>";
+
+        navigator.geolocation.getCurrentPosition(showMap, function error() {
+            output.innerHTML = "Unable to retrieve your location";
+        });
+    }
+
+    function initMap() {
+        geoFindMe();
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD86OKT9FRex_hBVnV8PTOnNXpSPjBeCeM&callback=initMap"
+        async defer></script>
+</body>
+</html>

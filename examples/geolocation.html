@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #screen {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+                color: green;
+                font-size: 24px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="screen">
+            Hello world!
+        </div>
+
+        <script>
+            console.log("JavaScript is alive!");
+            /*
+            navigator.permissions.query({name:'geolocation'})
+                    .then(function(permissionStatus) {
+                        console.log('geolocation permission state is ', permissionStatus.state);
+
+                        permissionStatus.onchange = function() {
+                            console.log('geolocation permission state has changed to ', this.state);
+                        };
+                    });
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log('Geolocation permissions granted');
+                console.log('Latitude:' + position.coords.latitude);
+                console.log('Longitude:' + position.coords.longitude);
+            });
+
+
+            var watchID = navigator.geolocation.watchPosition(function(position) {
+                console.log('Geolocation UPDATED');
+                console.log('Latitude:' + position.coords.latitude);
+                console.log('Longitude:' + position.coords.longitude);
+            },
+            function() {
+                console.log('Unable to retrieve location');
+            });
+            */
+            function geoFindMe() {
+                var output = document.getElementById("screen");
+
+                if (!navigator.geolocation){
+                    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                    return;
+                }
+
+                function success(position) {
+                    var latitude  = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+
+                    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+                    var img = new Image();
+                    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=16&size=640x640&sensor=false";
+                    output.appendChild(img);
+                };
+
+                function error() {
+                    output.innerHTML = "Unable to retrieve your location";
+                };
+
+                output.innerHTML = "<p>Locating…</p>";
+
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+            geoFindMe();
+
+        </script>
+    </body>
+</html>
