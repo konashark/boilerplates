@@ -1,0 +1,63 @@
+#screen {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: black;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.menuContainer {
+    position: absolute;
+}
+
+.menuPanel {
+    height: 100%;
+    width: 26%;
+    border: lightgray 1px solid;
+    display: none;
+    overflow: hidden;
+    padding: 10px 0px 10px 0px;
+    margin-right: -1px;
+    background-color: white;
+    float: left;
+}
+
+.menuItem {
+    width: 80%;
+//    height: 30px;
+    padding: 6px 10% 0px 10%;
+    cursor: pointer;
+}
+
+.menuItemText {
+    height: 100%;
+    border-bottom: lightgray 1px solid;
+    padding-bottom: 6px;
+}
+
+.menuItem:hover {
+    background-color: #eeeeee;
+    color: black;
+}
+
+.menuDivider {
+    margin: 4px 10% 4px 10%;
+    height: 1px;
+    background-color: lightgray;
+}
+
+.menuCaret {
+    float: right;
+}
+
+.menuSubMenuItem {
+}
+
+.menuSubMenuItem:hover {
+    background-color: #eeeeee;
+    color: black;
+}
