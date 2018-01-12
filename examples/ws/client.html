@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSockets</title>
+</head>
+<body>
+<div id="content"></div>
+
+<script type="text/javascript">
+    var content = document.getElementById('content');
+//    var socket = new WebSocket('ws://localhost:1337');
+    var socket = new WebSocket('ws://playground.ytv.ciscosystems.com:1337');
+    gSocket = socket;
+
+    socket.onopen = function (ev) {
+        socket.send('LOGIN', ev);
+    };
+
+    socket.onmessage = function (ev) {
+        content.innerHTML += ev.data +'<br />';
+    };
+
+    socket.onclose = function (ev) {
+        console.log('WebSocket closed: ', ev);
+    };
+
+    socket.onerror = function (error) {
+        console.log('WebSocket error: ', error);
+    };
+
+    var closeSocket = function (socket) {
+        // Close the connection if open
+        if (socket.readyState === WebSocket.OPEN){
+            socket.close( );
+        }
+    }
+
+    /*
+     window.addEventListener("offline", function(e) { console.log("offline"); });
+     window.addEventListener("online", function(e) { console.log("online"); });
+     if (navigator.onLine) {
+        alert("You are Online");
+     } else {
+        alert("You are Offline");
+     }
+
+     socket.onmessage = function(event) {
+     if(typeOf event.data === String ){
+     //create a JSON object
+     var jsonObject = JSON.parse(event.data);
+     var username = jsonObject.name;
+     var message = jsonObject.message;
+
+     console.log(“Received data string”);
+     }
+     }
+     */
+</script>
+</body>
+</html>
